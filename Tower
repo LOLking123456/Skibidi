@@ -24,7 +24,7 @@ local CredSection = Tab1:NewSection("Settings")
 
 Section:NewToggle("Auto Trade Macro", "Auto Trade Macro", function(Value)
    a = Value
-        while a do task.wait(.2)
+        while a do task.wait(.3)
         pcall(function()
  local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
