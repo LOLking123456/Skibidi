@@ -26,11 +26,19 @@ Section:NewToggle("Auto Trade Macro", "Auto Trade Macro", function(Value)
    a = Value
         while a do task.wait(.5)
         pcall(function()
-   local args = {
-    [1] = game:GetService("Players"):WaitForChild("Secretaccount495")
-}
+ local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ConfirmTrade"):FireServer(unpack(args))
+local ConfirmTradeRemote = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ConfirmTrade")
+
+-- Loop through all players in the game
+for _, player in pairs(Players:GetPlayers()) do
+    local args = {
+        [1] = player
+    }
+    
+    ConfirmTradeRemote:FireServer(unpack(args))
+end
 
 
    end)
