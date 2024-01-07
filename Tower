@@ -24,7 +24,7 @@ local CredSection = Tab1:NewSection("Settings")
 
 Section:NewToggle("Auto Trade Macro", "Auto Trade Macro", function(Value)
    a = Value
-        while a do task.wait(.3)
+        while a do task.wait(.2)
         pcall(function()
  local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -45,7 +45,7 @@ end
         end
 end)
 
-Section:NewTextBox("Auto Spawn Troop", "Type Name Of Troop You Wanna Spawn", function(txt)
+Section:NewTextBox("Auto Spawn Troop", "Type Name Of Troop You Wanna Spawn", function(s)
 	local args = {
     [1] = (s),
     [2] = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position),
@@ -92,7 +92,7 @@ local cameraNames = {
 "Titan TV Man",
 "Titan Speakerman",
 "Titan Reaper",
-"titan Cameraman",
+"Titan Cameraman",
 "Ultimate Titan TV Man",
 "Upgraded Titan Cameraman",
 "Golden Cameraman"
