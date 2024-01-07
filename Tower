@@ -101,8 +101,18 @@ game:GetService("ReplicatedStorage"):WaitForChild("Upgrade"):InvokeServer(unpack
 end)
 end
 end)
-
-Section:NewToggle("Noclip", "Go Through Things, Use Infinite Jump With it", function(state) -- 500 (MaxValue) | 0 (MinValue)
+Section:NewButton("FPS Booster", "Boost FPS", function(state) 
+    for _,v in pairs(workspace:GetDescendants()) do
+if v.ClassName == "Part"
+or v.ClassName == "SpawnLocation"
+or v.ClassName == "WedgePart"
+or v.ClassName == "Terrain"
+or v.ClassName == "MeshPart" then
+v.Material = "Plastic"
+end
+end
+end)
+Section:NewToggle("Noclip", "Go Through Things, Use Infinite Jump With it", function(state) 
 local Noclip = nil
 local Clip = nil
 
